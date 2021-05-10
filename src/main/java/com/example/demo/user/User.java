@@ -14,8 +14,14 @@ public class User {
 	@GeneratedValue
 	private long id;
 	private String name;
+	@javax.persistence.Transient
 	private List<Building> buildings;
 	private int currentFloor;
+	
+	public User(String name) {
+		super();
+		this.name = name;
+	}
 	
 	public User(String name, int currentFloor, List<Building> buildings) {
 		super();

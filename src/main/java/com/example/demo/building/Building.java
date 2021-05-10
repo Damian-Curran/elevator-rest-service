@@ -15,6 +15,7 @@ public class Building {
 	private long id;
 	private String name;
 	private String location;
+	@javax.persistence.Transient
 	private List<Elevator> elevators;
 	
 	public Building(String name, String location, List<Elevator> elevators) {

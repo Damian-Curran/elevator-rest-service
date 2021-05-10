@@ -12,8 +12,10 @@ public class Elevator {
 	@GeneratedValue
 	private long id;
 	private String name;
+	@javax.persistence.Transient
 	private List<Integer> floors;
 	private int currentFloor;
+	@javax.persistence.Transient
 	private State state;
 	
 	private enum State {
