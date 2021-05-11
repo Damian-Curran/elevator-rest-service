@@ -13,32 +13,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
+	@Autowired
+	private UserService us;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
 	public String add(@RequestBody User u){
-		return "Testing add user endpoint";
+		try {
+			us.add(u);
+		}catch(Exception e) {
+			return "Adding user unsuccessful. \n " + e.getMessage();
+		}
+		
+		return "Adding user successful";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}")
-	public User get(@PathVariable Long id){
-		return new User("Testing get user endpoint");
+	public User get(@PathVariable long id){
+		return us.getById(id);
 	}
 
 	@RequestMapping("/allUser")
 	public List<User> get(){
-		List<User> users = new ArrayList<User>();
-		User user = new User("Testing get all users endpoint");
-		users.add(user);
-		return users;
+		return us.getAll();
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/user/{id}")
-	public void delete(@PathVariable long id){
+	public String delete(@PathVariable long id){
+		try {
+			us.delete(id);
+		}catch(Exception e) {
+			return "Deleting user unsuccessful. \n" + e.getMessage();
+		}
 		
+		return "Deleting user successful";
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/update")
-	public void update(@RequestBody User u){
+	public String update(@RequestBody User u){
+		try {
+			us.update(u);
+		}catch(Exception e) {
+			return "Updating user unsuccessful. \n" + e.getMessage();
+		}
 		
+		return "Updating user successful";
 	}
 }
