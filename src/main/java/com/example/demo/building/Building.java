@@ -5,8 +5,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.example.demo.elevator.Elevator;
+import com.example.demo.user.User;
 
 @Entity
 public class Building {
@@ -15,8 +18,10 @@ public class Building {
 	private long id;
 	private String name;
 	private String location;
-	@javax.persistence.Transient
+	@OneToMany
 	private List<Elevator> elevators;
+	@ManyToMany
+	private List<User> user;
 	
 	public Building(String name, String location, List<Elevator> elevators) {
 		super();
