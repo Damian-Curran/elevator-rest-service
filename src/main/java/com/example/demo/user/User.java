@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import com.example.demo.building.Building;
 
@@ -14,7 +15,7 @@ public class User {
 	@GeneratedValue
 	private long id;
 	private String name;
-	@javax.persistence.Transient
+	@ManyToMany
 	private List<Building> buildings;
 	private int currentFloor;
 	
