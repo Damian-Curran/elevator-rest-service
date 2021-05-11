@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.example.demo.building.Building;
 
 @Entity
 public class Elevator {
@@ -15,22 +18,27 @@ public class Elevator {
 	@javax.persistence.Transient
 	private List<Integer> floors;
 	private int currentFloor;
-	@javax.persistence.Transient
 	private State state;
+	private int minFloor;
+	private int maxFloor;
+	@ManyToOne
+	private Building building;
 	
-	private enum State {
+	public enum State {
 		  UP,
 		  DOWN,
 		  STOPPED,
 		  OUT_OF_SERVICE
 		}
 	
-	public Elevator(String name,List<Integer> floors, int currentFloor, State state) {
+	public Elevator(String name,List<Integer> floors, int currentFloor, State state, int minFloor, int maxFloor) {
 		super();
 		this.name = name;
 		this.floors = floors;
 		this.currentFloor = currentFloor;
 		this.state = state;
+		this.minFloor = minFloor;
+		this.maxFloor = maxFloor;
 	}
 	
 	public Elevator(){
@@ -71,5 +79,21 @@ public class Elevator {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	public int getMinFloor() {
+		return minFloor;
+	}
+
+	public void setMinFloor(int minFloor) {
+		this.minFloor = minFloor;
+	}
+
+	public int getMaxFloor() {
+		return maxFloor;
+	}
+
+	public void setMaxFloor(int maxFloor) {
+		this.maxFloor = maxFloor;
 	}
 }
