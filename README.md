@@ -6,8 +6,8 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 
 1. Clone Repo
 2. Run commands in root folder
-  ..* mvn clean package 
-  ..* java -jar *jar name*
+..* mvn clean package 
+..* java -jar *jar name*
 3. See below image for endpoints or go to: http://localhost:8080/swagger-ui.html#/
 4. Create MySQL Database with script provided
 5. Ensure application.properties datasources are configured to look at newly created DB
