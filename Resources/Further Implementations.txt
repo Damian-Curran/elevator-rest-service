@@ -1,0 +1,46 @@
+Get buildings related to user
+=================================
+select b.id,b.name,b.location from building b
+inner join user_buildings ub on b.id = ub.buildings_id
+inner join user u on u.id = ub.user_id
+where u.id = *value*
+
+
+Get elevators related to buildings related to user
+=================================
+select e.state,e.current_floor,e.min_floor,e.max_floor from elevator e
+inner join building_elevators be on be.elevators_id = e.id
+inner join user_buildings ub on ub.buildings_id = be.building_id
+where ub.user_id = *value*
+
+
+
+Elevator Logic
+=================================
+Summon/Select adds floor to List<Integer> floorList
+
+example: 
+list = [1,3,5]
+state = DOWN
+list.add(6)
+[1,3,5,6]
+[1,3,6]
+[1,6]
+[6]
+state = UP
+[]
+state = STOPPED
+
+
+while(list.size() > 0){
+	if(state = state.DOWN){
+		if(list.size() > 0 && list.indexOf(Collections.min(list)) > currentFloor)
+			state = UP
+	}
+	else if(state == state.UP){
+		if(list.size() > 0 && list.indexOf(Collections.max(list)) < currentFloor)
+			state = DOWN
+	}
+	else if(list.size() == 0)
+		state = STOPPED
+}
