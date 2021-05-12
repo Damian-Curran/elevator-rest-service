@@ -1,3 +1,5 @@
+Hibernate annotation/keyword logic vs SQL query
+
 Get buildings related to user
 =================================
 select b.id,b.name,b.location from building b
