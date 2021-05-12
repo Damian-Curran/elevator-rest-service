@@ -24,6 +24,7 @@ Summon/Select adds floor to List<Integer> floorList
 example: 
 list = [1,3,5]
 state = DOWN
+currentFloor = 5
 list.add(6)
 [1,3,5,6]
 [1,3,6]
@@ -35,14 +36,41 @@ state = STOPPED
 
 
 while(list.size() > 0){
-	if(state = state.DOWN){
+	if(state = state.DOWN OR state = state.STOPPED){
 		if(list.size() > 0 && list.indexOf(Collections.min(list)) > currentFloor)
 			state = UP
 	}
-	else if(state == state.UP){
+	else if(state == state.UP OR state = state.STOPPED){
 		if(list.size() > 0 && list.indexOf(Collections.max(list)) < currentFloor)
 			state = DOWN
 	}
 	else if(list.size() == 0)
 		state = STOPPED
+		
+		
+	currentFloor = 3
+	-[5,1,2]
+
+	int nextSmallest =0;
+	int nextBiggest =0;
+	
+	list.sort()
+	-[1,2,5]
+	for(int l : list)
+	{
+		if(l < currentFloor){
+			nextSmallest = l;
+		}else if(l > currentFloor){
+			nextBiggest = l;
+			break;
+		}
+	}
+	
+	if(state = state.DOWN){
+		list.remove(nextSmallest);
+		currentFloor = nextSmallest;
+	}else if(state = state.UP){
+		list.remove(nextBiggest);
+		currentFloor = nextBiggest;
+	}
 }
