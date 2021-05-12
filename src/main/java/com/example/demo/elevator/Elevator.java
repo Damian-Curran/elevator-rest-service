@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Elevator {
 	@Id
 	@GeneratedValue
-	@JsonIgnore
 	private long id;
 	private String name;
 	@JsonIgnore

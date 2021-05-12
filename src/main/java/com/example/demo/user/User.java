@@ -8,13 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.example.demo.building.Building;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue
-	@JsonIgnore
 	private long id;
 	private String name;
 	@ManyToMany
