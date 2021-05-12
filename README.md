@@ -6,8 +6,8 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 
 1. Clone Repo
 2. Run commands in root folder
-..* mvn clean package 
-..* java -jar *jar name*
+    * mvn clean package 
+    * java -jar *jar name*
 3. See below image for endpoints or go to: http://localhost:8080/swagger-ui.html#/
 4. Create MySQL Database with script provided
 5. Ensure application.properties datasources are configured to look at newly created DB
@@ -23,7 +23,7 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 ### Running the tests
 
 1. Run command in root folder
-  ..* mvn surefire-report:report
+    * mvn surefire-report:report
 2. This will create a report in {$projectDirectory}/Target/Site/
 3. It is named: surefire-report.html and will look like the below image
 
@@ -36,23 +36,23 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 2. Endpoints can be seen here @ http://ec2-52-212-142-164.eu-west-1.compute.amazonaws.com:8080/swagger-ui.html#/
 
 Tools/Frameworks Used
-⋅⋅* Spring Boot
-  ⋅⋅* Main application
-⋅⋅* Maven 
-  ⋅⋅* Building,Dependency Management,JAR
-⋅⋅* JPA-Hibernate
-  ⋅⋅* Database orm
-⋅⋅* SpotBug
-  ⋅⋅* Bug Analysis
-⋅⋅* Swagger
-  ⋅⋅* describing RESTful APIs expressed using JSON
-⋅⋅* MySQL
-  ⋅⋅* Relational database management system
-⋅⋅* AWS EC2
-  ⋅⋅* Hosting applicaiton
-⋅⋅* AWS
-  ⋅⋅* Hosting MySQL instance
-⋅⋅* Mockito + Junit
-  ⋅⋅* Testing
-⋅⋅* Eclipse
-  ⋅⋅* Test Coverage Stats
+* Spring Boot
+  * Main application
+* Maven 
+  * Building,Dependency Management,JAR
+* JPA-Hibernate
+  * Database orm
+* SpotBug
+  * Bug Analysis
+* Swagger
+  * describing RESTful APIs expressed using JSON
+* MySQL
+  * Relational database management system
+* AWS EC2
+  * Hosting applicaiton
+* AWS
+  * Hosting MySQL instance
+* Mockito + Junit
+  * Testing
+* Eclipse
+  * Test Coverage Stats
