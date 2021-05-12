@@ -81,7 +81,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevator/summon")
-	public ResponseEntity<String> UserSummonElevator(@PathVariable long id,@PathVariable long buildingId) {
+	public ResponseEntity<String> summonElevator(@PathVariable long id,@PathVariable long buildingId) {
 		User user = us.getById(id);
 		List<Elevator> elevators = um.checkUserIsAssigned(us,id, buildingId,user);
 		if(elevators == null)
@@ -93,7 +93,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/{id}/building/{buildingId}/elevator/floorSelection/{selectedFloor}")
-	public ResponseEntity<String> UserSelectFloor(@PathVariable long id,@PathVariable long buildingId, int selectedFloor) {
+	public ResponseEntity<String> selectFloor(@PathVariable long id,@PathVariable long buildingId, int selectedFloor) {
 		User user = us.getById(id);
 		List<Elevator> elevators = um.checkUserIsAssigned(us,id, buildingId,user);
 		if(elevators == null)
