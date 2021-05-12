@@ -1,6 +1,6 @@
 # Elevator Rest Service
 
-The Elevator rest service is responsible for handling a fictional buildings elevator operations. This is done through providing RESTFUL endpoints for a user to interact with. A user is allowed to do CRUD operations on Users,Buildings and Elevators.
+The Elevator rest service is responsible for handling fictional buildings elevator operations. This is done through providing RESTFUL endpoints for a user to interact with. A user is allowed to do CRUD operations on Users,Buildings and Elevators.
 
 ## Getting started locally
 
