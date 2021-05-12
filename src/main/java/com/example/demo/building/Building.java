@@ -10,11 +10,13 @@ import javax.persistence.OneToMany;
 
 import com.example.demo.elevator.Elevator;
 import com.example.demo.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Building {
 	@Id
 	@GeneratedValue
+	@JsonIgnore
 	private long id;
 	private String name;
 	private String location;

@@ -8,13 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.example.demo.building.Building;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Elevator {
 	@Id
 	@GeneratedValue
+	@JsonIgnore
 	private long id;
 	private String name;
+	@JsonIgnore
 	@javax.persistence.Transient
 	private List<Integer> floors;
 	private int currentFloor;
