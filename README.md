@@ -35,7 +35,7 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 1. Access @ http://ec2-52-212-142-164.eu-west-1.compute.amazonaws.com:8080/
 2. Endpoints can be seen here @ http://ec2-52-212-142-164.eu-west-1.compute.amazonaws.com:8080/swagger-ui.html#/
 
-Tools/Frameworks Used
+## Tools/Frameworks Used
 * Spring Boot
   * Main application
 * Maven 
