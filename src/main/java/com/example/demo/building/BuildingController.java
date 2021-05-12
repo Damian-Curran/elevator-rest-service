@@ -3,6 +3,8 @@ package com.example.demo.building;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,45 +17,45 @@ public class BuildingController {
 	private BuildingService bs;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/building/add")
-	public String add(@RequestBody Building b){
+	public ResponseEntity<String> add(@RequestBody Building b){
 		try {
 			bs.add(b);
 		}catch(Exception e) {
-			return "Adding building unsuccessful. \n " + e.getMessage();
+			return new ResponseEntity<String>("Adding building unsuccessful. \n " + e.getMessage(), HttpStatus.PARTIAL_CONTENT );
 		}
 		
-		return "Adding building successful";
+		return new ResponseEntity<String>("Adding building successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/building/{id}")
-	public Building get(@PathVariable long id){
-		return bs.getById(id);
+		public ResponseEntity<Building> get(@PathVariable long id){
+		return new ResponseEntity<Building>(bs.getById(id), HttpStatus.OK );
 	}
 
-	@RequestMapping("/allBuilding")
-	public List<Building> get(){
-		return bs.getAll();
+	@RequestMapping(method = RequestMethod.GET, value ="/allBuilding")
+	public ResponseEntity<List<Building>> get(){
+		return new ResponseEntity<List<Building>>(bs.getAll(), HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/building/{id}")
-	public String delete(@PathVariable long id){
+	public ResponseEntity<String> delete(@PathVariable long id){
 		try {
 			bs.delete(id);
 		}catch(Exception e) {
-			return "Deleting building unsuccessful. \n" + e.getMessage();
+			return new ResponseEntity<String>("Deleting building unsuccessful. \n" + e.getMessage(), HttpStatus.NOT_FOUND );
 		}
 		
-		return "Deleting building successful";
+		return new ResponseEntity<String>("Deleting building successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/building/update")
-	public String update(@RequestBody Building b){
+	public ResponseEntity<String> update(@RequestBody Building b){
 		try {
 			bs.update(b);
 		}catch(Exception e) {
-			return "Updating building unsuccessful. \n" + e.getMessage();
+			return new ResponseEntity<String>("Updating building unsuccessful. \n" + e.getMessage(), HttpStatus.NOT_FOUND );
 		}
 		
-		return "Updating building successful";
+		return new ResponseEntity<String>("Updating building successful", HttpStatus.OK );
 	}
 }

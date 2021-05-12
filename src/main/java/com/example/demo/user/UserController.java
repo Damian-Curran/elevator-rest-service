@@ -2,7 +2,11 @@ package com.example.demo.user;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,68 +18,70 @@ import com.example.demo.elevator.Elevator;
 
 @RestController
 public class UserController {
+	Logger logger = LogManager.getLogger(UserController.class);
 	@Autowired
 	private UserService us;
 	private UserModel um = new UserModel();
 
 	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
-	public String add(@RequestBody User u) {
+	public ResponseEntity<String> add(@RequestBody User u) {
 		try {
 			us.add(u);
 		} catch (Exception e) {
-			return "Adding user unsuccessful. \n " + e.getMessage();
+			return new ResponseEntity<String>("Adding user unsuccessful. \n " + e.getMessage(), HttpStatus.PARTIAL_CONTENT );
 		}
 
-		return "Adding user successful";
+		return new ResponseEntity<String>("Adding user successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}")
-	public User get(@PathVariable long id) {
-		return us.getById(id);
+	public ResponseEntity<User> get(@PathVariable long id) {
+		return new ResponseEntity<User>(us.getById(id), HttpStatus.OK );
 	}
 
-	@RequestMapping("/allUser")
-	public List<User> get() {
-		return us.getAll();
+	@RequestMapping(method = RequestMethod.GET, value = "/allUser")
+	public ResponseEntity<List<User>> get() {
+		logger.info("getting all users");
+		return new ResponseEntity<List<User>>(us.getAll(), HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/user/{id}")
-	public String delete(@PathVariable long id) {
+	public ResponseEntity<String> delete(@PathVariable long id) {
 		try {
 			us.delete(id);
 		} catch (Exception e) {
-			return "Deleting user unsuccessful. \n" + e.getMessage();
+			return new ResponseEntity<String>("Deleting user unsuccessful. \n" + e.getMessage(), HttpStatus.NOT_FOUND );
 		}
 
-		return "Deleting user successful";
+		return new ResponseEntity<String>("Deleting user successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/update")
-	public String update(@RequestBody User u) {
+	public ResponseEntity<String> update(@RequestBody User u) {
 		try {
 			us.update(u);
 		} catch (Exception e) {
-			return "Updating user unsuccessful. \n" + e.getMessage();
+			return new ResponseEntity<String>("Updating user unsuccessful. \n" + e.getMessage(), HttpStatus.NOT_FOUND );
 		}
 
-		return "Updating user successful";
+		return new ResponseEntity<String>("Updating user successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/buildings")
-	public List<Building> getUserBuildings(@PathVariable long id) {
-		User user = us.getById(id);
-		return user.getBuildings();
+	public ResponseEntity<List<Building>> getUserBuildings(@PathVariable long id) {
+		
+		return new ResponseEntity<List<Building>>(us.getById(id).getBuildings(), HttpStatus.OK );
 	}
 
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevators/statuses") 
-	public List<Elevator> getUserBuildingsElevatorStatus(@PathVariable long id,@PathVariable long buildingId){
+	public ResponseEntity<List<Elevator>> getUserBuildingsElevatorStatus(@PathVariable long id,@PathVariable long buildingId){
 		User user = us.getById(id);
-		return um.checkUserIsAssigned(us,id, buildingId,user);
+		return new ResponseEntity<List<Elevator>>(um.checkUserIsAssigned(us,id, buildingId,user), HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevator/summon")
-	public String UserSummonElevator(@PathVariable long id,@PathVariable long buildingId) {
+	public ResponseEntity<String> UserSummonElevator(@PathVariable long id,@PathVariable long buildingId) {
 		User user = us.getById(id);
 		List<Elevator> elevators = um.checkUserIsAssigned(us,id, buildingId,user);
 		if(elevators == null)
@@ -83,11 +89,11 @@ public class UserController {
 		
 		Elevator elevator = um.getLeastBusyElevator(elevators,user.getCurrentFloor());
 		
-		return "Elevator " + elevator.getName() + " Summoned";
+		return new ResponseEntity<String>("Elevator " + elevator.getName() + " Summoned",HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/{id}/building/{buildingId}/elevator/floorSelection/{selectedFloor}")
-	public String UserSelectFloor(@PathVariable long id,@PathVariable long buildingId, int selectedFloor) {
+	public ResponseEntity<String> UserSelectFloor(@PathVariable long id,@PathVariable long buildingId, int selectedFloor) {
 		User user = us.getById(id);
 		List<Elevator> elevators = um.checkUserIsAssigned(us,id, buildingId,user);
 		if(elevators == null)
@@ -96,9 +102,9 @@ public class UserController {
 		Elevator elevator = um.getLeastBusyElevator(elevators,user.getCurrentFloor());
 		
 		if(elevator.getMaxFloor() < selectedFloor || elevator.getMinFloor() > selectedFloor)
-			return "floor not available for selection";
+			return new ResponseEntity<String>("floor not available for elevator selected",HttpStatus.OK );
 		
-		return "Elevator going to floor " + selectedFloor;
+		return new ResponseEntity<String>("Elevator going to floor " + selectedFloor,HttpStatus.OK );
 	}
 	 
 }
