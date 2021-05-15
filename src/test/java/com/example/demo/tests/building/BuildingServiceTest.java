@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.demo.building.Building;
-import com.example.demo.building.BuildingService;
+import com.example.demo.model.Building;
+import com.example.demo.service.BuildingService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest 
