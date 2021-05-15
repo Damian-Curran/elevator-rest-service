@@ -7,6 +7,7 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 1. Clone Repo
 2. Run commands in root folder
     * mvn clean package 
+    * cd target
     * java -jar *jar name*
 3. See below image for endpoints or go to: http://localhost:8080/swagger-ui.html#/
 4. Create MySQL Database with script provided
@@ -29,6 +30,14 @@ The Elevator rest service is responsible for handling fictional buildings elevat
 
 ![Screenshot_17](https://user-images.githubusercontent.com/14452921/117924161-36b8b500-b2ed-11eb-92dd-99dc383bffba.png)
 
+### Running SpotBugs
+Spot bugs uses static analysis to look for bugs in Java code.
+
+1. Run command in root folder
+   * mvn com.github.spotbugs:spotbugs-maven-plugin:spotbugs
+2. This will create the report in {$projectDirectory}/Target/
+3. It is named: spotbugsXml.xml
+4. Recommended viewing is through Chrome(drag file and drop into chrome)
 
 ## Getting Started on the cloud
 
