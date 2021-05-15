@@ -36,7 +36,7 @@ public class UserController {
 		}
 		
 		logger.info("Adding user successful");
-		return new ResponseEntity<String>("Adding user successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Adding user with ID: " + u.getId() + " and Name: " + u.getName() + " successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}")
@@ -61,7 +61,7 @@ public class UserController {
 		}
 
 		logger.info("Deleting user successful");
-		return new ResponseEntity<String>("Deleting user successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Deleting user with ID: " + id + " successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/user/update")
@@ -73,7 +73,7 @@ public class UserController {
 			return new ResponseEntity<String>("Updating user unsuccessful. \n" + e.getMessage(), HttpStatus.NOT_FOUND );
 		}
 		logger.info("Updating user successful.");
-		return new ResponseEntity<String>("Updating user successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Updating user with ID: " + u.getId() + " " + u.getName() + " successful", HttpStatus.OK );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/buildings")

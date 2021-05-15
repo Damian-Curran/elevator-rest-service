@@ -32,7 +32,7 @@ public class BuildingController {
 		}
 		
 		logger.info("Adding building successful");
-		return new ResponseEntity<String>("Adding building successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Adding building with ID: " + b.getId() + " and Name: " + b.getName() + " successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/building/{id}")
@@ -57,7 +57,7 @@ public class BuildingController {
 		}
 		
 		logger.info("Deleting building successful");
-		return new ResponseEntity<String>("Deleting building successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Deleting building with ID: " + id + " successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/building/update")
@@ -70,6 +70,6 @@ public class BuildingController {
 		}
 		
 		logger.info("Updating building successful");
-		return new ResponseEntity<String>("Updating building successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Updating building with ID: " + b.getId() + " " + b.getName() + " successful", HttpStatus.OK );
 	}
 }

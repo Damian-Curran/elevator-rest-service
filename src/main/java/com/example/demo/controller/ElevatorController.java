@@ -32,7 +32,7 @@ public class ElevatorController {
 		}
 		
 		logger.info("Adding elevator successful");
-		return new ResponseEntity<String>("Adding elevator successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Adding elevator with ID:" + el.getId() + " and Name: " + el.getName() + " successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/elevator/{id}")
@@ -57,7 +57,7 @@ public class ElevatorController {
 		}
 		
 		logger.info("Deleting elevator successful");
-		return new ResponseEntity<String>("Deleting elevator successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Deleting elevator with ID: " + id + " successful", HttpStatus.OK );
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value = "/elevator/update")
@@ -70,7 +70,7 @@ public class ElevatorController {
 		}
 		
 		logger.info("Updating elevator successful");
-		return new ResponseEntity<String>("Updating elevator successful", HttpStatus.OK );
+		return new ResponseEntity<String>("Updating elevator with ID: " + el.getId() + " " + el.getName() + " successful", HttpStatus.OK );
 	}
 	
 //	@RequestMapping(method = RequestMethod.PUT, value = "/elevator/summon/{id}")
