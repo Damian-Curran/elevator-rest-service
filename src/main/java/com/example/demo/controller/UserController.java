@@ -26,7 +26,7 @@ public class UserController {
 	private UserService us;
 	private UserModel um = new UserModel();
 
-	@RequestMapping(method = RequestMethod.POST, value = "/user/add")
+	@RequestMapping(method = RequestMethod.POST, value = "/user/")
 	public ResponseEntity<String> add(@RequestBody User u) {
 		try {
 			us.add(u);
@@ -64,7 +64,7 @@ public class UserController {
 		return new ResponseEntity<String>("Deleting user with ID: " + id + " successful", HttpStatus.OK );
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/user/update")
+	@RequestMapping(method = RequestMethod.PUT, value = "/user/")
 	public ResponseEntity<String> update(@RequestBody User u) {
 		try {
 			us.update(u);
@@ -83,15 +83,15 @@ public class UserController {
 	}
 
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevators/statuses") 
+	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevators/") 
 	public ResponseEntity<List<Elevator>> getUserBuildingsElevatorStatus(@PathVariable long id,@PathVariable long buildingId){
 		logger.info("Getting list of elevator statuses for a user.");
 		User user = us.getById(id);
 		return new ResponseEntity<List<Elevator>>(um.checkUserIsAssigned(us,id, buildingId,user), HttpStatus.OK );
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/user/{id}/building/{buildingId}/elevator/summon")
-	public ResponseEntity<String> summonElevator(@PathVariable long id,@PathVariable long buildingId) {
+	@RequestMapping(method = RequestMethod.PUT, value = "/user/{id}/building/{buildingId}/{floorNumber}/elevator/summon")
+	public ResponseEntity<String> summonElevator(@PathVariable long id,@PathVariable long buildingId,@PathVariable long floorNumber) {
 		logger.info("Summoning elevator for user.");
 		User user = us.getById(id);
 		List<Elevator> elevators = um.checkUserIsAssigned(us,id, buildingId,user);

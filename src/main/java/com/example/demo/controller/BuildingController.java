@@ -22,7 +22,7 @@ public class BuildingController {
 	@Autowired
 	private BuildingService bs;
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/building/add")
+	@RequestMapping(method = RequestMethod.POST, value = "/building/")
 	public ResponseEntity<String> add(@RequestBody Building b){
 		try {
 			bs.add(b);
@@ -60,7 +60,7 @@ public class BuildingController {
 		return new ResponseEntity<String>("Deleting building with ID: " + id + " successful", HttpStatus.OK );
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/building/update")
+	@RequestMapping(method = RequestMethod.PUT, value = "/building/")
 	public ResponseEntity<String> update(@RequestBody Building b){
 		try {
 			bs.update(b);

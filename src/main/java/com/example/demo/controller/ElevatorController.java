@@ -22,7 +22,7 @@ public class ElevatorController {
 	@Autowired
 	private ElevatorService es;
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/elevator/add")
+	@RequestMapping(method = RequestMethod.POST, value = "/elevator/")
 	public ResponseEntity<String> add(@RequestBody Elevator el){
 		try {
 			es.add(el);
@@ -60,7 +60,7 @@ public class ElevatorController {
 		return new ResponseEntity<String>("Deleting elevator with ID: " + id + " successful", HttpStatus.OK );
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/elevator/update")
+	@RequestMapping(method = RequestMethod.PUT, value = "/elevator/")
 	public ResponseEntity<String> update(@RequestBody Elevator el){
 		try {
 			es.update(el);
